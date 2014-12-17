@@ -211,6 +211,11 @@ class Linxy_LinkElementType extends BaseElementType
 			$query->andWhere(DbHelper::parseParam('links.id', $criteria->id, $query->params));
 		}
 
+		if ($criteria->shortUrl)
+		{
+			$query->andWhere(DbHelper::parseParam('links.shortUrl', $criteria->shortUrl, $query->params));
+		}
+
 		if ($criteria->groupId)
 		{
 			$query->andWhere(DbHelper::parseParam('links.groupId', $criteria->groupId, $query->params));

@@ -24,7 +24,7 @@ class LinxyController extends BaseController
 
 		if ($link)
 		{
-			linxy()->redirectToLongUrl($variables['shortUrl']);
+			linxy()->redirectToLongUrl($link);
 		}
 
 		throw new HttpException(404);

@@ -50,7 +50,7 @@ class LinxyService extends BaseApplicationComponent
 	{
 		if ($shortUrl)
 		{
-			$link = $this->getLinkByHandle($shortUrl);
+			$link = $this->getLinkByShortUrl($shortUrl);
 
 			if ($link && $link->shortUrl == $shortUrl && $link->getStatus() == 'Active')
 			{
@@ -268,16 +268,16 @@ class LinxyService extends BaseApplicationComponent
 	}
 
 	/**
-	 * Returns a link model if one is found in the database by handle
+	 * Returns a link model if one is found in the database by shortUrl
 	 *
-	 * @param string $linkHandle
+	 * @param string $shortUrl
 	 *
 	 * @throws Exception
 	 * @return Linxy_LinkModel|null
 	 */
-	public function getLinkByHandle($linkHandle)
+	public function getLinkByShortUrl($shortUrl)
 	{
-		return $this->getCriteria(array('limit' => 1, 'handle' => $linkHandle))->first();
+		return $this->getCriteria(array('limit' => 1, 'shortUrl' => $shortUrl))->first();
 	}
 
 	/**
