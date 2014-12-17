@@ -9,6 +9,8 @@ namespace Craft;
  */
 class LinxyController extends BaseController
 {
+	protected $allowAnonymous = array('actionRedirect');
+
 	/**
 	 * Finds a long URL associated with the short URL and redirects user to it
 	 *
