@@ -1,0 +1,48 @@
+{% extends "_layouts/elementindex" %}
+{% set title        = "Linxy"|t %}
+{% set elementType  = "Linxy_Link" %}
+
+{% set extraPageHeaderHtml %}
+    <a class="btn settings icon" href="{{ url('settings/plugins/linxy') }}" title="{{ 'Settings'|t }}"></a>
+{% endset %}
+
+{% set tabs = {
+	links:	    { label: "Links"|t, url: url('linxy') },
+	groups:		{ label: "Groups"|t, url: url('linxy/groups') }
+} %}
+
+{% block content %}
+	{% if groups|length %}
+		{{ parent() }}
+	{% else %}
+		<div>
+			<p>It looks like you don't have any groups to add links to yet.</p>
+			<hr>
+			<a class="btn submit" href="{{ url('linxy/groups/new') }}" title="Create A New Group">{{ "Create New Group"|t }}</a>
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+
+	{% if groups|length %}
+		<div class="buttons">
+			{% if groups|length > 1 %}
+				<div class="btn submit menubtn add icon">{{ "New Link"|t }}</div>
+				<div class="menu">
+					<ul>
+						{% for group in groups %}
+							<li><a href="{{ url('linxy/'~group.handle~'/new') }}">{{ group.name|t }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% else %}
+				<a class="btn submit add icon" href="{{ url('linxy/'~groups|first.handle~'/new') }}">{{ "New Link"|t }}</a>
+			{% endif %}
+		</div>
+	{% endif %}
+
+	{{ parent() }}
+{% endblock %}
+
+{% includeCssResource('linxy/css/linxy.css') %}

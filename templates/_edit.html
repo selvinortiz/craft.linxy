@@ -1,0 +1,119 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% set title		= 'Linxy' %}
+{% set groupHandle	= group.handle %}
+
+{% set tabs = {
+	links:		{ label: "Links"|t, url: url('linxy') },
+	groups:		{ label: "Groups"|t, url: url('linxy/groups') }
+} %}
+
+{% macro dateTimeField(link, attribute, label) %}
+
+	{% import "_includes/forms" as forms %}
+
+	{% set input %}
+		{{ forms.date({
+			id:        attribute,
+			name:      attribute,
+			value:     link.getAttribute(attribute),
+			errors:    link.getErrors(attribute),
+		}) }}
+
+		{{ forms.time({
+			id:        attribute,
+			name:      attribute,
+			value:     link.getAttribute(attribute),
+			errors:    link.getErrors(attribute),
+		}) }}
+	{% endset %}
+
+	{{ forms.field({
+		id:       attribute,
+		label:    label,
+		required: false
+	}, input) }}
+
+{% endmacro %}
+
+{% from _self import dateTimeField %}
+
+{% block content %}
+	<form id="alias-form" method="post" accept-charset="UTF-8" data-saveshortcut="1" data-saveshortcut-redirect="{{ continueEditingUrl }}">
+		<input type="hidden" name="action" value="linxy/saveLink">
+		<input type="hidden" name="groupId" value="{{ group.id }}">
+		{% if link.id %}<input type="hidden" name="linkId" value="{{ link.id }}">{% endif %}
+		{% if craft.isLocalized() %}<input type="hidden" name="locale" value="{{ link.locale }}">{% endif %}
+
+		{{ forms.textField({
+			label: "Short URL"|t,
+			id: "title",
+			name: "shortUrl",
+			placeholder: "username",
+			value: link.shortUrl,
+			errors: link.getErrors("shortUrl"),
+			autofocus: true,
+			first: true,
+			required: true,
+		}) }}
+
+		{{ forms.textField({
+			label: "Long URL"|t,
+			id: "longUrl",
+			name: "longUrl",
+			value: link.longUrl,
+			placeholder: "twitter.com/username",
+			errors: link.getErrors("longUrl"),
+			required: true,
+		}) }}
+
+		{{ forms.selectField({
+			label: "HTTP Status Code"|t,
+			id: 'httpCode',
+			name: 'httpCode',
+			options: {"302": 302, "301": 301},
+			value: link.httpCode,
+			errors: link.getErrors('httpCode'),
+			required: true,
+		}) }}
+
+		<hr>
+		<h2>Link Lifecycle</h2>
+		<p style="color: #999;">Links are active after creation and never expire, you can change that by using a date range.</p>
+
+		{{ dateTimeField(link, 'activeDate', "Active Date"|t) }}
+		{{ dateTimeField(link, 'expiryDate', "Expiry Date"|t) }}
+
+		<div>
+			{% for tab in group.getFieldLayout().getTabs() %}
+				<div id="tab{{ loop.index }}"{% if not loop.first %} class="hidden"{% endif %}>
+					{% include "_includes/fields" with {
+						fields: tab.getFields(),
+						element: link
+					} only %}
+				</div>
+			{% endfor %}
+		</div>
+
+		<div class="buttons">
+			<div class="btngroup submit">
+				<input type="submit" class="btn submit" value="{{ 'Save'|t }}">
+
+				<div class="btn submit menubtn"></div>
+				<div class="menu">
+					<ul>
+						<li><a class="formsubmit" data-redirect="{{ continueEditingUrl }}">{{ "Save and continue editing"|t }}</a></li>
+						<li><a class="formsubmit" data-redirect="linxy/{{ groupHandle }}/new">{{ "Save and add another"|t }}</a></li>
+					</ul>
+				</div>
+			</div>
+
+			{% if link.id %}
+			<input type="button" class="btn formsubmit" value="{{ 'Delete'|t }}" data-action="linxy/deleteLink"
+				data-confirm="{{ 'Are you sure you want to delete this link?'|t }}"
+				data-redirect="linxy">
+			{% endif %}
+		</div>
+	</form>
+{% endblock %}

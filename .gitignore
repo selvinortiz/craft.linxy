@@ -1,0 +1,8 @@
+# dotfiles
+# --
+.tmp
+.idea
+.DS_Store
+# devfiles
+# --
+sync.sh

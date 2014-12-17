@@ -1,0 +1,49 @@
+{% extends "_layouts/cp" %}
+{% set title = "Groups"|t %}
+
+{% set tabs = {
+	links: { label: "Links"|t, url: url('linxy') },
+	groups: { label: "Groups"|t, url: url('linxy/groups') }
+} %}
+
+{% set selectedTab = 'groups' %}
+
+{% set content %}
+	<div id="nogroups"{% if groups %} class="hidden"{% endif %}>
+		<p>{{ "No groups exist yet."|t }}</p>
+	</div>
+
+	{% if groups|length %}
+		<table id="groups" class="data fullwidth collapsible">
+			<thead>
+				<th scope="col">{{ "Name"|t }}</th>
+				<th scope="col">{{ "Handle"|t }}</th>
+				<td class="thin"></td>
+			</thead>
+			<tbody>
+				{% for group in groups %}
+					<tr data-id="{{ group.id }}" data-name="{{ group.name|t }}">
+						<th scope="row" data-title="{{ 'Name'|t }}"><a href="{{ url('linxy/groups/' ~ group.id) }}">{{ group.name|t }}</a></th>
+						<td data-title="{{ 'Handle'|t }}"><code>{{ group.handle }}</code></td>
+						<td class="thin"><a class="delete icon" title="{{ 'Delete'|t }}" role="button"></a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+
+	<div id="newgroupcontainer" class="buttons{% if CraftEdition == CraftPersonal and groups|length >= 20 %} hidden{% endif %}">
+		<a href="{{ url('linxy/groups/new') }}" class="btn submit add icon">{{ "New Group"|t }}</a>
+	</div>
+{% endset %}
+
+{% set js %}
+	var adminTable = new Craft.AdminTable({
+		tableSelector: '#groups',
+		noObjectsSelector: '#nogroups',
+		newObjectBtnSelector: '#newgroupcontainer',
+		deleteAction: 'linxy/deleteGroup',
+		confirmDeleteMessage: '{{ "Are you sure you want to delete the “{name}” group and all of its links?"|t }}'
+	});
+{% endset %}
+{% includeJs js %}

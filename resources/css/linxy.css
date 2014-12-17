@@ -1,0 +1,77 @@
+.dataSummary th {
+  text-transform: uppercase;
+}
+.dataSummary td, .dataSummary th {
+  padding: 5px 20px;
+  text-align: center;
+}
+.dataSummary .siblings {
+  padding: 5px;
+}
+.dataSummary .faded {
+  color: #ccc;
+  font-weight: bold;
+}
+.dataSummary .strong {
+  color: #111;
+  font-weight: bold;
+}
+.dataSummary .ltr {
+  text-align: left;
+}
+.dataSummary .rtl {
+  text-align: right;
+}
+.aliasNew .feedback, .aliasEdit .feedback {
+  color: #999;
+}
+.aliasNew .success, .aliasEdit .success {
+  color: #0a0;
+}
+.aliasNew .failure, .aliasEdit .failure {
+  color: #d00;
+}
+.aliasSettings h2, .aliasSettings h3 {
+  color: #444;
+}
+.aliasSettings h3.ico {
+  padding-left: 32px;
+  line-height: 32px;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+.aliasSettings h3.settings {
+  background-image: url(../img/settings.png);
+}
+.aliasSettings .subtle {
+  color: #bbb;
+}
+.aliasSettings .notice {
+  color: #aaa;
+  font-family: serif;
+  font-style: italic;
+}
+.aliasSettings .aliasSection {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px dotted #bbb;
+}
+.status.Active,
+.status.Enabled,
+.status.Reserved
+{
+	/* @green */
+	background-position: 0 0;
+}
+.status.Pending,
+.status.Expired
+{
+	/* @orange */
+	background-position: 0 -10px;
+}
+.status.Disabled,
+.status.Cancelled
+{
+	/* @red */
+	background-position: 0 -20px;
+}
