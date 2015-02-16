@@ -42,6 +42,21 @@ class Linxy_LinkModel extends BaseElementModel
 	 */
 	public function getStatus()
 	{
+		$now    = DateTimeHelper::currentUTCDateTime();
+		$status = 'Inactive';
+
+		if ($now > $this->activeDate)
+		{
+			$status = 'Active';
+		}
+
+		if ($this->expiryDate && $now > $this->expiryDate)
+		{
+			$status = 'Expired';
+		}
+
+		$this->status = $status;
+
 		return $this->status;
 	}
 
