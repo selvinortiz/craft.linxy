@@ -2,7 +2,7 @@
 namespace Craft;
 
 /**
- * Linxy @v1.1.1
+ * Linxy @v1.2.0
  *
  * Linxy allows you to manage your own short URL service within Craft
  *
@@ -33,7 +33,7 @@ class LinxyPlugin extends BasePlugin
 	 */
 	public function getVersion()
 	{
-		return '1.1.1';
+		return '1.2.0';
 	}
 
 	/**

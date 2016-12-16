@@ -1,4 +1,4 @@
-## Linxy 1.0.0
+## Linxy 1.2
 *by* [Selvin Ortiz](http://twitter.com/selvinortiz)
 
 ----
@@ -15,8 +15,8 @@ The official release is the only distribution meant for production and it is req
 - Let's you define a keyword/short URL for a long URL
 
 ### Minimum Requirements
-- PHP 5.3.10
-- Craft 1.3
+- PHP 5.6
+- Craft 2.0
 
 ### Installation
 1. Download the [latest release](https://github.com/selvinortiz/craft.linxy/releases) with the following name pattern `linxy.v*.*.*.zip`
@@ -27,11 +27,13 @@ The official release is the only distribution meant for production and it is req
 ### Changelog
 
 ----
-#### 1.0.0
+#### 1.2.0
+* Moves plugin files on level deeper for better repo organization
+* Updates README
+
+#### 1.1.1
 * Initial Release
 * Implements short URLs as _Element Types_
-
-### Roadmap
 
 ### Help & Feedback
 If you have questions, comments, or concerns feel free to reach out to me on twitter [@selvinortiz](http://twitter.com/selvinortiz)
@@ -39,4 +41,4 @@ If you have questions, comments, or concerns feel free to reach out to me on twi
 ### Licence
 **Linxy** for **Craft** is open source software licensed under the [MIT License](http://opensource.org/licenses/MIT)
 
-![Open Source Initiative](resources/img/osilogo.png)
+![Open Source Initiative](linxy/resources/img/osilogo.png)
